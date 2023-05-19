@@ -5,6 +5,7 @@ import sqlite3
 from place import location
 from search import find
 from user_db import user_bp
+import os
 
 app = Flask(__name__)
 DATABASE='groups.db'
@@ -168,3 +169,7 @@ def warning():
 
 if __name__ == '__main__':
     app.run(debug=True, port=80, threaded=True)
+    
+os.makedirs("templates", exist_ok=True)
+with open("templates/main.html", "w") as f:
+    f.write(render_template("main.html"))
