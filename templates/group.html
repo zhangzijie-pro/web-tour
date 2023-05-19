@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旅行者联盟</title>
+    <style type="text/css">
+        		nav {
+		background-color: #333;
+		color: white;
+		overflow: hidden;
+		}
+        nav ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: space-between;
+		}
+
+		nav li {
+		float: left;
+		}
+
+		nav li a {
+		display: block;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		}
+
+		nav li a:hover {
+		background-color: #ddd;
+		color: black;
+		}
+		            #modal-container {
+        background-color: #f7f7f7;
+        margin: 10% auto;
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+    }
+
+    #close-modal {
+        display: block;
+        margin-top: 10px;
+        background-color: #ddd;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+    }
+        h1{
+        text-align:center;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a class="connect-us" id="connect-us">联系我们</a></li>
+        <li><a href="{{url_for('user.personal')}}">查看个人中心</a></li>
+        <li><a href="/group">旅行者联盟</a> </li>
+        <li><a href="{{url_for('user.logout')}}">退出登录</a></li>
+    </ul>
+</nav>
+
+<div id="modal-container">
+    <div id="modal-content">
+        <h2>联系我们</h2>
+        <p>加qq1942151886</p>
+        <small>欢迎投稿，改进建议以及旅行群的分享</small>
+        <button id="close-modal">关闭</button>
+    </div>
+</div>
+    <script>
+         const connectUsLink = document.querySelector("#connect-us");
+        const modalContainer = document.querySelector("#modal-container");
+        const closeModalButton = document.querySelector("#close-modal");
+
+        connectUsLink.addEventListener("click", function() {
+          modalContainer.style.display = "block";
+        });
+
+        closeModalButton.addEventListener("click", function() {
+          modalContainer.style.display = "none";
+        });
+    </script>
+  <div class="container">
+    <h1>旅行者联盟</h1>
+    <small>欢迎来到特种兵旅行总部</small><br>
+    <small>想找到总部吗？</small><br>
+      {{error}}
+        <br><a href="/add">添加群聊</a>
+    <form id="search-form">
+      <label for="location-input">地点:</label>
+      <input type="text" id="location-input" name="location"><br>
+      <button type="submit">搜索</button>
+    </form>
+    <div id="result"></div>
+  </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#search-form').submit(function(event) {
+      event.preventDefault();
+
+      const locationInput = $('#location-input').val();
+
+      $.ajax({
+        url: '/search_group',
+        type: 'GET',
+        data: { location: locationInput },
+        success: function(result) {
+          let html = '';
+          for (let i = 0; i < result.length; i++) {
+            const group = result[i].group;
+            const location = result[i].location;
+            html += `<li>${group} ${location}</li>`;
+          }
+          $('#result').html(html);
+        }
+      });
+    });
+  });
+</script>
+
+    <div class="group">
+        <div class="group-wuhan">
+            <h3>
+                武汉旅行群
+            </h3>
+            <img src="image/wuhan.jpg">
+        </div>
+        <div class="group-changsha">
+            <h3>
+                长沙旅行群
+            </h3>
+            <img src="image/wuhan.jpg">
+        </div>
+
+        <div class="group-changsha">
+            <h3>
+                上海旅行群
+            </h3>
+            <img src="image/wuhan.jpg">
+        </div>
+        <div class="group-changsha">
+            <h3>
+                安徽旅行群
+            </h3>
+            <img src="image/wuhan.jpg">
+        </div>
+        <div class="group-changsha">
+            <h3>
+                厦门旅行群
+            </h3>
+            <img src="image/wuhan.jpg">
+        </div>
+    </div>
+</body>
+</html>

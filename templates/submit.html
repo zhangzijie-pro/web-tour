@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>submit</title>
+    <style>
+      body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin: 40px 0;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+textarea {
+  height: 200px;
+}
+
+input[type="file"] {
+  margin-bottom: 20px;
+}
+
+input[type="submit"] {
+  padding: 10px;
+  background-color: #4CAF50;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* 响应式设计 */
+
+@media screen and (max-width: 600px) {
+  form {
+    max-width: 100%;
+  }
+}
+}
+
+h1 {
+  text-align: center;
+  margin: 40px 0;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+textarea {
+  height: 200px;
+}
+
+input[type="file"] {
+  margin-bottom: 20px;
+}
+
+input[type="submit"] {
+  padding: 10px;
+  background-color: #4CAF50;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* 响应式设计 */
+
+@media screen and (max-width: 600px) {
+  form {
+    max-width: 100%;
+  }
+}
+
+
+    </style>
+</head>
+<body>
+<h1>发布一篇你的旅行攻略</h1>
+<form action="/submit" method="POST" enctype="multipart/form-data">
+    <label>标题:</label><br>
+    <input type="text" name="title" required><br>
+    <label>你的位置:</label><br>
+    <input type="text" name="location" required><br>
+    <label>文章:</label><br>
+    <textarea name="description" required></textarea><br>
+    <label>图片:</label><br>
+    <input type="file" name="image" accept="image/*" onchange="previewImage(this)" required><br>
+    <img id="preview" src="#" alt="预览" style="max-width:200px;">
+    <script>
+        function previewImage(input) {
+    var preview = document.getElementById('preview');
+    preview.style.display = "block";
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+    </script>
+    {{message}}<br>
+    <input type="submit" value="发布">
+</form>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>个人信息浏览</title>
+    <style>
+                /* CSS styles for the body */
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+        }
+
+        /* CSS styles for the form */
+        form {
+          background-color: #fff;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin-bottom: 20px;
+        }
+
+        form label {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form textarea {
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          padding: 5px;
+          width: 300px;
+        }
+
+        form textarea {
+          height: 100px;
+          resize: vertical;
+        }
+
+        form input[type="submit"] {
+          background-color: #4CAF50;
+          border: none;
+          color: #fff;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin-top: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        /* CSS styles for the personal information section */
+        h3 {
+          margin-top: 20px;
+        }
+
+        p {
+          margin-bottom: 10px;
+        }
+
+        img {
+          max-width: 200px;
+          max-height: 200px;
+          border-radius: 50%;
+        }
+
+        /* CSS styles for the message section */
+        .error {
+          color: red;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
+        .success {
+          color: green;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>个人信息浏览</h1>
+    {{messages}}
+    <form action="/personal" method="POST">
+        <input type="hidden" name="username" value="{{ info.username }}">
+        <label for="nickname">昵称：</label>
+        <input type="text" id="nickname" name="nickname" value="{{ info.nickname }}"><br><br>
+        <label for="avatar">头像链接：</label>
+        <input type="text" id="avatar" name="avatar" value="{{ info.avatar }}"><br><br>
+        <label for="birthdate">出生年月日：</label>
+        <input type="date" id="birthdate" name="birthdate" value="{{ info.birthdate }}"><br><br>
+        <label for="travel_preference">旅游偏好：</label>
+        <textarea id="travel_preference" name="travel_preference">{{ info.travel_preference }}</textarea><br><br>
+        <label for="dream_place">想去的景点：</label>
+        <input type="text" id="dream_place" name="dream_place" value="{{ info.dream_place }}"><br><br>
+        <label for="wish_place">梦想地：</label>
+        <input type="text" id="wish_place" name="wish_place" value="{{ info.wish_place }}"><br><br>
+        {{ message }}<br>
+        <input type="submit" value="保存">
+    </form>
+    <h3>个人信息</h3>
+    <p>用户名：{{ info.username }}</p>
+    <p>昵称：{{ info.nickname }}</p>
+    <p>头像：<img src="{{ info.avatar }}" alt="avatar"></p>
+    <p>出生年月日：{{ info.birthdate }}</p>
+    <p>旅游偏好：{{ info.travel_preference }}</p>
+    <p>想去的景点：{{ info.dream_place }}</p>
+    <p>梦想地：{{ info.wish_place }}</p>
+</body>
+</html>

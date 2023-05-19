@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>佛教文化</title>
+    <style type="text/css">
+       body{
+       	font-family: Arial, sans-serif;
+		background-color: #FFFFF0;
+       }
+       .place {
+  text-align: center;
+    }
+    .place span{
+        background: linear-gradient(to right,#ec695c, #61c454) no-repeat right bottom;
+        background-size:0 2px;
+        transition: background-size 1300ms;
+    }
+    .place span:hover{
+        background-position-x: left;
+        background-size: 100% 2px;
+    }
+        ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      background-color: #ccc;
+    }
+
+    li:hover {
+      background-color: #f00;
+    }
+    </style>
+</head>
+<body>
+    <div class="place">
+        <h2>
+            <span>
+                佛教文化
+            </span>
+        </h2>
+        <ul>
+            <li class="wu" onclick="wu()">五台山</li>
+            <li class="e" onclick="e()">峨眉山</li>
+            <li class="jiu" onclick="jiu()">九华山</li>
+            <li class="pu" onclick="pu()">普陀山</li>
+            <li class="fan" onclick="fan()">梵净山</li>
+            <li class="xue" onclick="xue()">鸡足山</li>
+            <li class="ji" onclick="ji()">天台山</li>
+            <li class="t" onclick="t()">终南山</li>
+            <li class="z" onclick="z()">雪獒山</li>
+        </ul>
+    </div>
+
+    <p id="hovered-text"></p>
+    <script>
+    const wu = document.querySelector('.wu');
+    const e = document.querySelector('.e');
+    const jiu = document.querySelector('.jiu');
+    const pu = document.querySelector('.pu');
+    const fan = document.querySelector('.fan');
+    const xue = document.querySelector('.xue');
+    const ji = document.querySelector('.ji');
+    const t = document.querySelector('.t');
+    const z = document.querySelector('.z');
+    const hoveredText = document.querySelector('#hovered-text');
+
+    wu.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://img1.baidu.com/it/u=380566791,68150649&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=666 ';
+
+        const link = document.createElement('a');
+        link.href = 'http://www.wtsykfwzx.com/';
+        link.textContent = '官网订票';
+
+        hoveredText.innerHTML = '五台山，位于山西省忻州市，介于北纬38°55—39°66、东经113°29—113°39之间，景区规划面积607平方千米，行政管辖面积436平方千米。<br>《名山志》载：“五台山五峰耸立，高出云表，山顶无林木，有如垒土之台，故曰五台。<br>五台山是中国青庙黄庙共处的佛教道场，有宗教活动场所86处，其中多敕建寺院，多朝皇帝前来参拜。著名的有：显通寺、塔院寺、菩萨顶、南山寺、黛螺顶、金阁寺、万佛阁、碧山寺等。五台山是中国佛教四大名山之一。<br>2004年，五台山被评为中华十大名山.2009年6月，五台山被列入世界文化遗产.2007年，被评为国家AAAAA级旅游景区。';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+    e.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img2.baidu.com/it/u=4073438819,863858578&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+      const link = document.createElement('a');
+      link.href = 'https://emsjq.leshan.gov.cn/';
+      link.textContent = '官方网址';
+
+      hoveredText.innerHTML =  '峨眉山是中国四大佛教名山之一，位于四川省乐山市峨眉山市境内，是中国佛教禅宗的发源地之一。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    jiu.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://n.sinaimg.cn/sinakd20117/200/w1110h690/20211109/276a-4e9519b997b12201a0263777f210ce07.jpg';
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/50591#/index';
+      link.textContent = '途牛订票';
+
+      hoveredText.innerHTML = '九华山是中国佛教名山之一，位于江西省庐山市修水县，是中国佛教禅宗的发源地之一。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    pu.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F2ac1311e-fdf7-485a-b925-587e98947f7b%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1682850959&t=0f1e4536e4d9451d0391e20204415d3a';
+
+      const link = document.createElement('a');
+      link.href = 'http://www.putuoshan.gov.cn/';
+      link.textContent = '官方网址';
+
+      hoveredText.innerHTML = '普陀山是中国佛教名山之一，位于浙江省舟山市普陀区';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    fan.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img2.baidu.com/it/u=79263212,2626983168&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+      const link = document.createElement('a');
+      link.href = 'http://www.mtfjs.com/';
+      link.textContent = '官方网址';
+
+      hoveredText.innerHTML = '梵净山（Mount Fanjing），武陵山脉主峰，海拔2572米，位于贵州省铜仁市的江口、印江、松桃三县交界处，总面积为775.14平方千米，遗产地面积402.75平方千米，缓冲区面积372.39平方千米。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    xue.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img0.baidu.com/it/u=693760622,663592547&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500';
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/468#/index';
+      link.textContent = '官方网址';
+
+      hoveredText.innerHTML = '鸡足山，又名九曲山、青巅山,<br>位于云南省大理白族自治州宾川县城西北方，东西长7千米，南北宽6千米，总面积28.22平方千米。<br>宋代，僧人慈济在青巅山峻石山出家修行，崇奉佛教，随之佛教在鸡足山开始兴起。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    ji.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img1.baidu.com/it/u=3821601182,4013200445&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/9062#/index';
+      link.textContent = '官方网址';
+
+      hoveredText.innerHTML = '天台山<br>位于浙江省台州市天台县和合街1号，地处宁波、绍兴、金华、台州四市的交界地带，西南连仙霞岭，东北遥接舟山群岛，为曹娥江与甬江的分水岭，多悬岩、峭壁、瀑布。天台山的主峰华顶山位于天台县东北，海拔1098米，由花岗岩构成。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    t.addEventListener('mouseover',()=>{
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img1.baidu.com/it/u=3862891687,3846081225&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/38048#/index';
+      link.textContent = '官方网址';
+
+      hoveredText.innerHTML = '终南山，又名太乙山、地肺山、中南山、周南山，简称南山，位于陕西省境内秦岭山脉中段，古城长安（西安）之南，“寿比南山”、“终南捷径”等典故的诞生地，是中国重要的地理标志。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    z.addEventListener('mouseover',()=>{
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://tse2-mm.cn.bing.net/th/id/OIP-C.oSYdRk2TUiQ5WjfSVwMGdQHaFj?w=257&h=193&c=7&r=0&o=5&dpr=1.5&pid=1.7';
+
+      const link = document.createElement('a');
+      link.href = 'http://www.yytourism.com/';
+      link.textContent = '官方网址';
+
+      hoveredText.innerHTML = '雪窦山（Mount Xuedou），国家级风景名胜区，国家森林公园，国家AAAAA级旅游景区，<br>浙江省省级文化传承生态保护区，被誉为“四明第一山”，是中国五大佛教名山之一的弥勒佛的道场。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>山河</title>
+    <style type="text/css">
+       body{
+       	font-family: Arial, sans-serif;
+		background-color: #FFFFF0;
+       }
+       .place {
+        text-align: center;
+    }
+    .place span{
+        background: linear-gradient(to right,#ec695c, #61c454) no-repeat right bottom;
+        background-size:0 2px;
+        transition: background-size 1300ms;
+    }
+    .place span:hover{
+        background-position-x: left;
+        background-size: 100% 2px;
+    }
+        ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      background-color: #ccc;
+    }
+
+    li:hover {
+      background-color: #f00;
+    }
+    </style>
+</head>
+<body>
+    <div class="place">
+        <h2>
+            <span>
+                名山大川
+            </span>
+        </h2>
+        <ul>
+            <li class="h">太行山</li>
+            <li class="tai">泰山</li>
+            <li class="heng">衡山</li>
+            <li class="yu">玉龙雪山</li>
+            <li class="san">三峡</li>
+            <li class="gao">嵩山</li>
+            <li class="hua">华山</li>
+            <li class="huang">黄山</li>
+            <li class="hen">恒山</li>
+        </ul>
+    </div>
+
+    <p id="hovered-text"></p>
+    <script>
+    const h = document.querySelector('.h');
+    const tai = document.querySelector('.tai');
+    const heng = document.querySelector('.heng');
+    const yu = document.querySelector('.yu');
+    const san = document.querySelector('.san');
+    const gao = document.querySelector('.gao');
+    const hua = document.querySelector('.hua');
+    const huang = document.querySelector('.huang');
+    const hen = document.querySelector('.hen');
+    const hoveredText = document.querySelector('#hovered-text');
+
+    h.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '300px';
+        img.style.left = '100px';
+        img.src = 'https://img1.baidu.com/it/u=380566791,68150649&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=666 ';
+
+        const link = document.createElement('a');
+        link.href = '';
+        link.textContent = '官方网址';
+
+        hoveredText.innerHTML = '太行山一般指太行山脉。 太行山（北纬34°34—40°43、东经110°14—114°33），又名五行山、王母山、女娲山，是中国东部地区的重要山脉和地理分界线。';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+    tai.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img0.baidu.com/it/u=4134846537,4265542353&fm=253&fmt=auto&app=138&f=JPEG?w=1000&h=500';
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/16407#/index';
+      link.textContent = '官网订票';
+
+      hoveredText.innerHTML = '泰山风景名胜区，位于山东省泰安市泰山区红门路45号，面积400多平方千米。<br>泰山被喻为中华民族伟大崇高的象征，由古老的片麻岩构成的断块山地，崛起于华北大平原东缘的齐鲁丘陵上，主峰海拔1545米，为五岳之首，被誉为<五岳独尊>。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    heng.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img2.baidu.com/it/u=1001963915,4094436111&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=664';
+
+      const link = document.createElement('a');
+      link.href = '';
+      link.textContent = '官网订票';
+
+      hoveredText.innerHTML = '衡山，又名南岳、寿岳、南山，主体部分位于湖南省衡阳市南岳区、衡山县和衡阳县东部。据战国时期《甘石星经》记载，因其位于星座二十八宿的轸星之翼，<变应玑衡>，<铨德钧物>，犹如衡器，可称天地，故名衡山。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    yu.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img1.baidu.com/it/u=1696742773,3941493043&fm=253&fmt=auto&app=138&f=JPEG?w=666&h=500';
+
+      const link = document.createElement('a');
+      link.href = 'http://imgbdb3.bendibao.com/hybdb/xiuxian/20223/22/2022322115302_12395.png';
+      link.textContent = '官网订票';
+
+      hoveredText.innerHTML = '丽江市玉龙雪山景区，是北半球最南的大雪山。位于玉龙纳西族自治县境内，是国家旅游局正式批准的5A级国家风景名胜区。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    san.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img0.baidu.com/it/u=2235896496,3750425484&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/7802#/index';
+      link.textContent = '订票官网';
+
+      hoveredText.innerHTML = '三峡一般指长江三峡。 长江三峡西起重庆市奉节县白帝城，东至湖北宜昌市南津关，全长193千米，沿途两岸奇峰陡立、峭壁对峙，自西向东依次为瞿塘峡、巫峡、西陵峡。重庆市巫山县境内，有大宁河小三峡、马渡河小小三峡。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    gao.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img1.baidu.com/it/u=1852534455,2386222305&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=665';
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/665#/index';
+      link.textContent = '官网订票';
+
+      hoveredText.innerHTML = '嵩山，五岳之中岳，秦岭山系东延的余脉，位于河南省郑州市登封市，地理坐标为北纬34°23—34°35，东经112°56—113°11，西起洛阳龙门东侧，向东逐渐转向东北一直延伸到新密以北，东西绵亘近百千米，南北宽约20千米。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    hua.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img2.baidu.com/it/u=4065390554,2671291909&fm=253&fmt=auto&app=138&f=JPEG?w=757&h=500';
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/461#/index';
+      link.textContent = '官网订票';
+
+      hoveredText.innerHTML = '华山，古称西岳，雅称太华山，为五岳之一，位于陕西省渭南市华阴市，在省会西安以东120千米处。南接秦岭山脉，北瞰黄渭，自古以来就有奇险天下第一山的说法。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    huang.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '400px';
+      img.style.height = '400px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = 'https://img1.baidu.com/it/u=4178084138,4063849307&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=666';
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/1800943#/index';
+      link.textContent = '官网订票';
+
+      hoveredText.innerHTML = '黄山，古称黟山，位于安徽省黄山市境内，地处安徽省南部、黄山市北部，地跨歙县、休宁县、黟县和黄山区、徽州区，东起黄狮岭，西至小岭脚，北始二龙桥，南达汤口镇。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+
+    hen.addEventListener('mouseover', () => {
+      const img = document.createElement('img');
+      img.style.width = '400px';
+      img.style.height = '400px';
+      img.style.position = 'absolute';
+      img.style.top = '200px';
+      img.style.left = '100px';
+      img.src = "https://img0.baidu.com/it/u=3532145015,3366571423&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500";
+
+      const link = document.createElement('a');
+      link.href = 'https://www.tuniu.com/menpiao/134#/index';
+      link.textContent = '官网订票';
+
+      hoveredText.innerHTML ='恒山，含狭义和广义两个概念。狭义的恒山，即所谓北岳恒山，亦名太恒山，古称玄武山、崞山，高是山，玄岳等，明末清初被确定为五岳之北岳恒山。';
+      hoveredText.appendChild(link);
+      hoveredText.appendChild(img);
+    });
+    </script>
+</body>
+</html>

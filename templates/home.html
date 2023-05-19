@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旅行攻略</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/bootstrap.min.css') }}">
+    <style type="text/css">
+		nav {
+		background-color: #333;
+		color: white;
+		overflow: hidden;
+		}
+        nav ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: space-between;
+		}
+
+		nav li {
+		float: left;
+		}
+
+		nav li a {
+		display: block;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		}
+
+		nav li a:hover {
+		background-color: #ddd;
+		color: black;
+		}
+
+            #modal-container {
+        background-color: #f7f7f7;
+        margin: 10% auto;
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+    }
+
+    #close-modal {
+        display: block;
+        margin-top: 10px;
+        background-color: #ddd;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+		h1 {
+		text-align: center;
+		}
+
+		form {
+		width: 80%;
+		margin: 0 auto;
+		}
+
+		label {
+		display: inline-block;
+		width: 100px;
+		}
+
+		.grid-container {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		}
+
+		.grid-item {
+		width: 300px;
+		height: 400px;
+		margin: 20px;
+		border: 1px solid #ccc;
+		box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		}
+
+        .preference {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+
+        .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+        }
+
+        .grid-item {
+        width: 300px;
+        height: 200px;
+        margin: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        }
+
+        .grid-item a {
+        margin: 0 auto;
+        }
+
+        .query {
+        margin-top: 20px;
+        text-align: center;
+        }
+
+        .centered {
+        display: block;
+        margin: 0 auto;
+        }
+		.grid-item img {
+		max-width: 100%;
+		max-height: 70%;
+		margin-bottom: 10px;
+		}
+
+        //旅游偏好中的背景图片
+        .grid-item:nth-child(1) {
+          max-width: 100%;
+          max-height: 70%;
+          background-image: url('https://ts1.cn.mm.bing.net/th/id/R-C.1c50874367fccbc7a48d2c15ad79198c?rik=mZkQGx8lzKEYdQ&riu=http%3a%2f%2fpic.bizhi360.com%2fbbpic%2f85%2f7085.jpg&ehk=n2Xu5InUS3TTmKxpgklvniuUTygS5bnrTnt%2fcEq0mV8%3d&risl=&pid=ImgRaw&r=0');
+          background-size: cover;
+        }
+
+        .grid-item:nth-child(2) {
+          max-width: 100%;
+          max-height: 70%;
+          background-image: url('https://youimg1.c-ctrip.com/target/100s15000000xvmyz7D18.jpg');
+          background-size: cover;
+        }
+
+        .grid-item:nth-child(3) {
+          max-width: 100%;
+          max-height: 70%;
+          background-image: url('https://youimg1.c-ctrip.com/target/100ffk105isk2xvs06076.jpg');
+          background-size: cover;
+        }
+
+        .grid-item:nth-child(4) {
+          max-width: 100%;
+          max-height: 70%;
+          background-image: url('https://ts1.cn.mm.bing.net/th/id/R-C.801077100b2078c5dbf6707be36b6d19?rik=h62kc7u65TYFQA&riu=http%3a%2f%2fimg3.guilinlife.com%2fcnews%2f2019%2f0328%2f20190328033743695.jpeg&ehk=WnQAQvmwVgEkDsG7Y03gbtVY4q%2f1uLUvqKXTsr9lKHQ%3d&risl=&pid=ImgRaw&r=0');
+          background-size: cover;
+        }
+
+		.map {
+		margin-top: 50px;
+		text-align: center;
+		}
+
+		.route {
+		display: inline-block;
+		margin: 20px;
+		}
+
+		.route input {
+		width: 200px;
+		margin-right: 10px;
+		}
+
+		.hotel {
+		margin-top: 50px;
+		text-align: center;
+		}
+
+        .tour_ticket{
+        margin-top: 60px;
+        text-align: center
+        }
+
+		.ticket {
+		margin-top: 50px;
+		text-align: center;
+		}
+
+		.train {
+		background-color: #4CAF50;
+		color: white;
+		padding: 10px 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		border-radius: 5px;
+		}
+
+		.train:hover {
+		background-color: #3e8e41;
+		}
+
+
+    </style>
+    <script type="text/JavaScript">
+			function updateNav() {
+		  if (userLoggedIn) {
+			// 如果用户已经登录，则将按钮文本更改为"退出"并添加相应的链接
+			document.querySelector('.login-btn a').innerHTML = '退出';
+			document.querySelector('.login-btn a').href = '/logout';
+		  } else {
+			// 如果用户没有登录，则将按钮文本更改为"登录"并添加相应的链接
+			document.querySelector('.login-btn a').innerHTML = '登录';
+			document.querySelector('.login-btn a').href = '/login';
+		  }
+		}
+
+		// 调用updateNav函数，以确保导航栏在页面加载时正确显示用户登录状态
+		updateNav();
+
+
+    </script>
+</head>
+
+<body>
+<nav>
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a class="connect-us" id="connect-us">联系我们</a></li>
+        <li><a href="{{url_for('user.personal')}}">查看个人中心</a></li>
+        <li><a href="{{url_for('user.logout')}}">退出登录</a></li>
+        <li><a href="/group">旅行者联盟</a></li>
+        <li><a href="/chat">攻略讨论</a></li>
+    </ul>
+</nav>
+
+<div id="modal-container">
+    <div id="modal-content">
+        <h2>联系我们</h2>
+        <p>加qq1942151886</p>
+        <small>欢迎投稿，改进建议以及旅行群的分享</small>
+        <button id="close-modal">关闭</button>
+    </div>
+</div>
+<script>
+         const connectUsLink = document.querySelector("#connect-us");
+        const modalContainer = document.querySelector("#modal-container");
+        const closeModalButton = document.querySelector("#close-modal");
+
+        connectUsLink.addEventListener("click", function() {
+          modalContainer.style.display = "block";
+        });
+
+        closeModalButton.addEventListener("click", function() {
+          modalContainer.style.display = "none";
+        });
+
+</script>
+
+
+<h1>旅行攻略推荐</h1>
+<p>欢迎, {{ username }}!</p>
+<h4>使用前请先登录</h4>
+<form action="/search" method="get">
+    <label for="destination">目的地:</label><br/>
+    <input type="text" id="destination" name="destination_name"><br/>
+    <input type='submit' value='查询'>
+</form>
+
+
+<div class="preference">
+    <h2>旅游偏好：</h2>
+    <div class="grid-container">
+        <div class="grid-item">
+            <a href="{{url_for('recommend.mountain')}}">
+                祖国的河山
+            </a>
+        </div>
+        <div class="grid-item">
+            <a href="{{url_for('recommend.culture')}}">
+                佛教文化
+            </a>
+        </div>
+        <div class="grid-item">
+            <a href="{{ url_for('recommend.history')}}">
+                中国历史
+            </a>
+        </div>
+        <div class="grid-item">
+            <a href="{{url_for('recommend.customs')}}">
+                风土人情
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div class="map">
+    <h2>
+        <a href="/map">地图：</a>
+    </h2>
+    <div class="route">
+        <form method="get" action="/map">
+            <label>起点:</label>
+            <input type="text" name="start_location"><br>
+            <label>终点:</label>
+            <input type="text" name="end_location"><br>
+            {{ error }}
+            <input type="submit" title="查询">
+
+        </form>
+    </div>
+</div>
+
+
+<div class="hotel">
+    <h2>住酒店</h2>
+    <div class="html">
+        <h3>
+            <a href="/warning">点此了解详情</a>
+        </h3>
+    </div>
+</div>
+
+<div class="tour_ticket">
+    <div class="search_ticket">
+        <h2>
+            景点门票查询
+        </h2>
+    </div>
+    <div class="load_ticket">
+        <small title="请点击此查明">here——————></small><a href="/warning">景点门票</a>
+    </div>
+</div>
+
+<div class="ticket">
+    <h2>
+		<span>
+			<a href="https://www.12306.cn/index/" class="train">订票</a>
+		</span>
+    </h2>
+    <div class="book_ticket">
+
+    </div>
+
+</div>
+</body>
+</html>
+

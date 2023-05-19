@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>城市信息查询</title>
+        <style type="text/css">
+       body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    margin: auto;
+    max-width: 800px;
+    }
+
+    h1 {
+        text-align:center;
+        margin-top: 30px;
+    }
+
+    form {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    label {
+        margin-right: 10px;
+        font-size: 18px;
+    }
+
+    input[type="text"] {
+        font-size: 18px;
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    button[type="submit"] {
+        font-size: 18px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+
+    h2 {
+        margin-top: 30px;
+        font-size: 26px;
+    }
+
+    h3 {
+        margin-top: 20px;
+        font-size: 22px;
+    }
+
+    p {
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-top: 10px;
+    }
+
+    li {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    li h4 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    small[title="tips"] {
+        display: block;
+        text-align: center;
+        margin-top: 50px;
+        font-size: 14px;
+        color: #999;
+    }
+
+    /* 新增样式代码 */
+    nav {
+        background-color: #333;
+        color: white;
+        overflow: hidden;
+        margin-bottom: 30px; /* 添加一个下边距，避免遮挡页面内容 */
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    nav li {
+        float: left;
+    }
+
+    nav li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        border-bottom: 2px solid transparent; /* 添加底部边框和过渡效果 */
+        transition: border-color 0.2s ease-in-out;
+    }
+
+    nav li a:hover {
+        background-color: #ddd;
+        color: black;
+        border-color: white;
+    }
+
+    .connect-us {
+        cursor: pointer;
+    }
+
+    #modal-container {
+        background-color: #f7f7f7;
+        margin: 10% auto;
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+    }
+
+    #close-modal {
+        display: block;
+        margin-top: 10px;
+        background-color: #ddd;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a class="connect-us" id="connect-us">联系我们</a></li>
+        <li><a href="{{url_for('user.personal')}}">查看个人中心</a></li>
+        <li><a href="/group">旅行者联盟</a> </li>
+        <li><a href="{{url_for('user.logout')}}">退出登录</a></li>
+    </ul>
+</nav>
+
+<div id="modal-container">
+    <div id="modal-content">
+        <h2>联系我们</h2>
+        <p>加qq1942151886</p>
+        <small>欢迎投稿，改进建议以及旅行群的分享</small>
+        <button id="close-modal">关闭</button>
+    </div>
+</div>
+    <script>
+         const connectUsLink = document.querySelector("#connect-us");
+        const modalContainer = document.querySelector("#modal-container");
+        const closeModalButton = document.querySelector("#close-modal");
+
+        connectUsLink.addEventListener("click", function() {
+          modalContainer.style.display = "block";
+        });
+
+        closeModalButton.addEventListener("click", function() {
+          modalContainer.style.display = "none";
+        });
+    </script>
+
+    <h1>城市信息查询</h1>
+    <form method="post">
+        <label for="city">请输入城市名：</label>
+        <input type="text" id="city" name="city" />
+        <button type="submit">查询</button>
+    </form>
+    {% if city_info %}
+        <h2>{{ city }}信息：</h2>
+        <p>{{ city_info['概述'] }}</p>
+        <h3>交通</h3>
+        <p>{{ city_info['交通'] }}</p>
+        <h3>住宿</h3>
+        <p>{{ city_info['住宿'] }}</p>
+        <h3>美食</h3>
+        <p>{{ city_info['美食'] }}</p>
+        <h3>景点</h3>
+        <ul>
+            {% for spot in city_info['景点'] %}
+                <li>
+                    <h4>{{ spot['name'] }}</h4>
+                    <p>{{ spot['description'] }}</p>
+                    <p>门票价格：{{ spot['price'] }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        <h3>注意事项</h3>
+        <p>{{ city_info['注意事项'] }}</p>
+    {% endif %}
+    {% if error_msg %}
+        <p>{{ error_msg }}</p>
+    {% endif %}
+<small title="tips">详细攻略</small>
+</body>
+</html>
+

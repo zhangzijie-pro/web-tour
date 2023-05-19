@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Group</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav li {
+            float: left;
+        }
+
+        nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav li a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #ccc;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        form label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            height: 40px;
+            padding: 5px 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            width: 150px;
+            height: 40px;
+            font-size: 18px;
+            background-color: #2675c5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        /* 模态框样式 */
+        #modal-container {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #ccc;
+            text-align: center;
+        }
+
+        #close-modal {
+            background-color: #ddd;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a class="connect-us" id="connect-us">联系我们</a></li>
+        <li><a href="{{url_for('user.personal')}}">查看个人中心</a></li>
+        <li><a href="/group">旅行者联盟</a> </li>
+        <li><a href="{{url_for('user.logout')}}">退出登录</a></li>
+    </ul>
+</nav>
+
+<div id="modal-container">
+    <div id="modal-content">
+        <h2>联系我们</h2>
+        <p>加qq1942151886</p>
+        <small>欢迎投稿，改进建议以及旅行群的分享</small>
+        <button id="close-modal">关闭</button>
+    </div>
+</div>
+    <script>
+         const connectUsLink = document.querySelector("#connect-us");
+        const modalContainer = document.querySelector("#modal-container");
+        const closeModalButton = document.querySelector("#close-modal");
+
+        connectUsLink.addEventListener("click", function() {
+          modalContainer.style.display = "block";
+        });
+
+        closeModalButton.addEventListener("click", function() {
+          modalContainer.style.display = "none";
+        });
+    </script>
+<div class="container">
+  <h1>添加群聊</h1>
+  <form id="add-group-form">
+    <label for="group-input">群号:</label>
+    <input type="text" id="group-input" name="group"><br>
+    <label for="location-input">地点:</label>
+    <input type="text" id="location-input" name="location"><br>
+    {{ message }}
+    <button type="submit">添加</button>
+  </form>
+  <div id="result"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#add-group-form').submit(function(event) {
+      event.preventDefault();
+
+      const groupInput = $('#group-input').val();
+      const locationInput = $('#location-input').val();
+
+      $.ajax({
+        url: '/add',
+        type: 'POST',
+        data: { group: groupInput, location: locationInput },
+        success: function(result) {
+          $('#result').html('Group added successfully!');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

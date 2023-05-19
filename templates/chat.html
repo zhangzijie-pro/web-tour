@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>旅游建议论坛</title>
+    <style>
+        /* 修改默认配置 根据需要添加，正式代码在下面 */
+        nav {
+		background-color: #333;
+		color: white;
+		overflow: hidden;
+		}
+        nav ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: space-between;
+		}
+
+		nav li {
+		float: left;
+		}
+
+		nav li a {
+		display: block;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		}
+
+		nav li a:hover {
+		background-color: #ddd;
+		color: black;
+		}
+
+            #modal-container {
+        background-color: #f7f7f7;
+        margin: 10% auto;
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+    }
+
+    #close-modal {
+        display: block;
+        margin-top: 10px;
+        background-color: #ddd;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+        form {
+		width: 80%;
+		margin: 0 auto;
+		}
+
+		label {
+		display: inline-block;
+		width: 100px;
+		}
+
+        form {
+              display: flex;
+              align-items: center;
+              margin-bottom: 20px;
+            }
+
+            label {
+              margin-right: 10px;
+            }
+
+            input[type="text"] {
+              padding: 5px;
+              border-radius: 5px;
+              border: 1px solid #ccc;
+              font-size: 16px;
+              width: 300px;
+            }
+
+            button[type="submit"] {
+              background-color: #007bff;
+              color: #fff;
+              border: none;
+              border-radius: 5px;
+              padding: 5px 10px;
+              font-size: 16px;
+              cursor: pointer;
+            }
+
+            button[type="submit"]:hover {
+              background-color: #0069d9;
+            }
+
+		.guide {
+              width: 80%;
+              margin: 0 auto;
+              padding: 20px;
+              border: 1px solid #ccc;
+              box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+              text-align: center;
+              margin-bottom: 20px;
+            }
+
+            .guide h2 {
+              margin-top: 0;
+            }
+
+            .guide p {
+              margin-bottom: 10px;
+            }
+
+            .guide img {
+              max-width: 100%;
+              max-height: 70%;
+              margin-bottom: 10px;
+            }
+
+            .guide a {
+              display: block;
+              text-align: center;
+              margin-top: 20px;
+              font-size: 16px;
+              color: #333;
+              text-decoration: none;
+              border: 1px solid #ccc;
+              padding: 10px;
+              border-radius: 5px;
+            }
+
+            .guide a:hover {
+              background-color: #ccc;
+            }
+
+            a[href="/submit"] {
+              text-decoration: underline;
+              display: block;
+              text-align: center;
+              margin: 20px auto;
+              font-size: 16px;
+              color: #333;
+              text-decoration: none;
+              border: 1px solid #ccc;
+              padding: 10px;
+              border-radius: 5px;
+            }
+
+            a[href="/submit"]:hover {
+              background-color: #ccc;
+            }
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font-weight: inherit;
+            font-family: inherit;
+            font-style: inherit;
+            vertical-align: baseline;
+            box-sizing: border-box;
+        }
+        section {
+            display: block
+        }
+
+        ul {
+            list-style: none
+        }
+        q {
+            quotes: none
+        }
+
+        q:after {
+            content: "";
+            content: none
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        @font-face {
+            font-family: AlimamaShuHeiTi-Bold;
+            src: url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.eot) format('embedded-opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.otf) format('opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.ttf) format('TrueType'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff) format('woff'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff2) format('woff2');
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            background: #121212;
+            color: white;
+            font-family: AlimamaShuHeiTi-Bold, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            text-transform: initial;
+            letter-spacing: initial;
+            min-height: 704px
+        }
+
+        button {
+            font-family: AlimamaShuHeiTi-Bold
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 500
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        *::-moz-selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+
+        *::selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        .wrap {
+            align-content: flex-start;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .title {
+            width: 100%;
+            display: flex;
+            padding: 30px;
+        }
+
+        .title span {
+            font-size: 40px;
+            font-family: AlimamaShuHeiTi-Bold;
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .effect {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            position: relative;
+            margin: auto;
+        }
+
+        .loop-wrap {
+            width: 30rem;
+            display: flex;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loop {
+            display: flex;
+            width: fit-content;
+            animation-name: loop;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: var(--direction);
+            animation-duration: var(--duration);
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .tag {
+            display: flex;
+            align-items: center;
+            gap: 0 0.2rem;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            background-color: #334155;
+            border-radius: 0.4rem;
+            padding: 0.7rem 1rem;
+            margin-right: 1rem;
+            box-shadow: 0 0.1rem 0.2rem rgb(0 0 0 / 20%), 0 0.1rem 0.5rem rgb(0 0 0 / 30%), 0 0.2rem 1.5rem rgb(0 0 0 / 40%);
+            height: 40px;
+        }
+
+        .tag span {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .fade {
+            pointer-events: none;
+            background: linear-gradient(90deg, #121212, transparent 30%, transparent 70%, #121212);
+            position: absolute;
+            inset: 0;
+        }
+
+        @keyframes loop {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .code {
+            padding: 25px 15px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .code img {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<nav>
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a class="connect-us" id="connect-us">联系我们</a></li>
+        <li><a href="{{url_for('user.personal')}}">查看个人中心</a></li>
+        <li><a href="/group">旅行者联盟</a> </li>
+        <li><a href="{{url_for('user.logout')}}">退出登录</a></li>
+    </ul>
+</nav>
+
+<div id="modal-container">
+    <div id="modal-content">
+        <h2>联系我们</h2>
+        <p>加qq1942151886</p>
+        <small>欢迎投稿，改进建议以及旅行群的分享</small>
+        <button id="close-modal">关闭</button>
+    </div>
+</div>
+    <script>
+         const connectUsLink = document.querySelector("#connect-us");
+        const modalContainer = document.querySelector("#modal-container");
+        const closeModalButton = document.querySelector("#close-modal");
+
+        connectUsLink.addEventListener("click", function() {
+          modalContainer.style.display = "block";
+        });
+
+        closeModalButton.addEventListener("click", function() {
+          modalContainer.style.display = "none";
+        });
+    </script>
+
+    <div class="wrap">
+        <!-- 标题 -->
+        <div class="title">
+            <span>旅行建议论坛</span>
+        </div>
+        <!-- 展示效果 -->
+        <div class="effect">
+            <div class="loop-wrap">
+                <div class="loop">
+                    <div class="tag"><span>#</span>武汉</div>
+                    <div class="tag"><span>#</span>长沙</div>
+                    <div class="tag"><span>#</span>北京</div>
+                    <div class="tag"><span>#</span>珠海</div>
+                    <div class="tag"><span>#</span>香港</div>
+                    <div class="tag"><span>#</span>澳门</div>
+                    <div class="tag"><span>#</span>福建</div>
+                    <div class="tag"><span>#</span>上海</div>
+                    <div class="tag"><span>#</span>石家庄</div>
+                    <div class="tag"><span>#</span>桂林</div>
+                    <div class="tag"><span>#</span>成都</div>
+                    <div class="tag"><span>#</span>哈尔滨</div>
+                </div>
+                <div class="loop">
+                    <div class="tag"><span>#</span>南京</div>
+                    <div class="tag"><span>#</span>三亚</div>
+                    <div class="tag"><span>#</span>凤凰古城</div>
+                    <div class="tag"><span>#</span>张家界</div>
+                    <div class="tag"><span>#</span>中卫</div>
+                    <div class="tag"><span>#</span>小渔村</div>
+                    <div class="tag"><span>#</span>甘南</div>
+                    <div class="tag"><span>#</span>威海</div>
+                    <div class="tag"><span>#</span>青岛</div>
+                    <div class="tag"><span>#</span>济南</div>
+                    <div class="tag"><span>#</span>恩施</div>
+                    <div class="tag"><span>#</span>重庆</div>
+                </div>
+                <div class="loop">
+                    <div class="tag"><span>#</span>杭州</div>
+                    <div class="tag"><span>#</span>西安</div>
+                    <div class="tag"><span>#</span>湘西</div>
+                    <div class="tag"><span>#</span>大理</div>
+                    <div class="tag"><span>#</span>丽江</div>
+                    <div class="tag"><span>#</span>亚丁稻城</div>
+                    <div class="tag"><span>#</span>西藏</div>
+                    <div class="tag"><span>#</span>新疆</div>
+                    <div class="tag"><span>#</span>江西</div>
+                    <div class="tag"><span>#</span>洛阳</div>
+                    <div class="tag"><span>#</span>呼伦贝尔</div>
+                    <div class="tag"><span>#</span>西双版纳</div>
+                </div>
+                <div class="fade"></div>
+            </div>
+        </div>
+    </div>
+<form action="/search_chat" method="get">
+  <label for="search">搜索攻略：</label>
+  <input type="text" id="search" name="query"><br>
+  <button type="submit">搜索</button>
+</form>
+<a href="/submit_index">发布一个攻略</a>
+{% for guide in guides %}
+      <div class="guide">
+        <h2>{{ guide[1] }}</h2>
+        <p>作者来自：{{ guide[2] }}</p>
+          <p>{{ guide[3] }}</p>
+        <img src="data:image/jpeg;base64, {{ guide[4] }}" alt="{{ guide[1] }}">
+      </div>
+{% endfor %}
+
+<br>
+
+
+</body>
+<script>
+    const loop = document.querySelectorAll('.wrap .loop')
+    loop.forEach((val, key) => {
+        let number = Math.floor(Math.random() * (20000 - 15000)) + 15000
+        if (key === 1) {
+            val.setAttribute('style', '--direction:reverse;--duration: ' + number + 'ms')
+        } else {
+            val.setAttribute('style', '--direction:normal;--duration: ' + number + 'ms')
+        }
+    })
+</script>
+
+</html>

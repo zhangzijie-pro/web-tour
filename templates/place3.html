@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>历史遗迹</title>
+    <style type="text/css">
+body {
+font-family: Arial, sans-serif;
+background-color: #FFFFF0;
+}
+
+    .place {
+        text-align: center;
+    }
+
+    .place span {
+        background: linear-gradient(to right,#ec695c, #61c454) no-repeat right bottom;
+        background-size: 0 2px;
+        transition: background-size 1300ms;
+    }
+
+    .place span:hover {
+        background-position-x: left;
+        background-size: 100% 2px;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        display: inline-block;
+        width: 100px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        background-color: #ccc;
+    }
+
+    li:hover {
+        background-color: #f00;
+    }
+
+    </style>
+</head>
+
+<body>
+<div class="place">
+    <h2>
+        <span>历史遗迹</span>
+    </h2>
+    <ul>
+        <li class="bin">兵马俑</li>
+        <li class="e">明十三陵</li>
+        <li class="jiu">长城</li>
+        <li class="pu">颐和园</li>
+        <li class="fan">四行仓库</li>
+        <li class="xue">山海关</li>
+        <li class="ji">沈阳清皇宫</li>
+        <li class="t">嘉峪关</li>
+        <li class="z">周口店遗址</li>
+    </ul>
+</div>
+
+<p id="hovered-text"></p>
+
+<script>
+    const bin = document.querySelector('.bin');
+    const e = document.querySelector('.e');
+    const jiu = document.querySelector('.jiu');
+    const pu = document.querySelector('.pu');
+    const fan = document.querySelector('.fan');
+    const xue = document.querySelector('.xue');
+    const ji = document.querySelector('.ji');
+    const t = document.querySelector('.t');
+    const z = document.querySelector('.z');
+    const hoveredText = document.querySelector('#hovered-text');
+
+    bin.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://img2.baidu.com/it/u=1435814649,2830111919&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+        const link = document.createElement('a');
+        link.href = 'http://www.wtsykfwzx.com/';
+        link.textContent = '官方网址';
+
+        hoveredText.innerHTML = '<h2>兵马俑</h2>，即秦始皇陵兵马俑，亦简称秦兵马俑或秦俑<br>是第一批全国重点文物保护单位、第一批中国世界遗产，位于今陕西省西安市临潼区秦始皇陵以东1.5千米处的兵马俑坑内。 ';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+        e.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://img2.baidu.com/it/u=2996711686,4215993090&fm=253&fmt=auto&app=138&f=JPEG?w=823&h=500';
+
+        const link = document.createElement('a');
+        link.href = 'http://thirteenming.com/';
+        link.textContent = '官方网址';
+
+        hoveredText.innerHTML = '明十三陵，是中国明朝时期皇帝及其妃嫔的陵寝。<br>位于北京西北郊，占地面积120平方公里。十三陵被认为是古代中国皇家陵园中规模最大、保存最完整的一组皇家陵墓，被誉为"万园之园，千陵之陵"。 ';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+    jiu.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://img0.baidu.com/it/u=1119205838,3881822766&fm=253&fmt=auto&app=138&f=JPEG?w=749&h=500';
+
+        const link = document.createElement('a');
+        link.href = 'http://www.badaling.cn/';
+        link.textContent = '官方网址';
+
+        hoveredText.innerHTML = '长城，又称万里长城，是中国古代的军事防御工程，是世界上最伟大的建筑奇迹之一。它始建于公元前7世纪，距今已有两千多年历史。被誉为"中国古代七大奇迹"之一，是中华民族传统文化的杰出代表之一，也是中国文化的象征之一。';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+    pu.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://img0.baidu.com/it/u=1768792452,1631026266&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+        const link = document.createElement('a');
+        link.href = 'http://www.summerpalace-china.com/';
+        link.textContent = '官方网址';
+
+        hoveredText.innerHTML = '颐和园，又叫万寿山庄，是中国清代皇家园林，位于北京市西郊。建造始于清乾隆四年（1749年），占地面积约290公顷，水域面积约220公顷，是中国现存规模最大、保存最完整的皇家园林，也是世界闻名的旅游胜地之一。';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+    fan.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://img1.baidu.com/it/u=2887604122,2369792353&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+        const link = document.createElement('a');
+        link.href = 'https://www.sohu.com/a/209352127_100027841';
+        link.textContent = '资料来源';
+
+        hoveredText.innerHTML = '四行仓库是中华人民共和国成立后全国范围内最为著名的一次仓库保卫战。发生于1948年春夏之间，中国共产党的晋察冀军区指挥下的1500余名士兵奋勇抗敌，经过58天58夜的浴血奋战，最终在8月14日取得了历史上的伟大胜利。';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+    xue.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://img2.baidu.com/it/u=1589322037,1346640002&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=667';
+
+        const link = document.createElement('a');
+        link.href = 'http://www.shanhaiguan.cn/';
+        link.textContent = '官方网址';
+
+        hoveredText.innerHTML = '山海关，又称"天下第一关"，位于河北省秦皇岛市山海关区，是中国明代万里长城的东口，东起渤海，西至嘉峪关。山海关始建于明朝洪武十七年（1384年），占地面积20000余平方米，因为它是连接中国的"咽喉"，因此历来是军事上的要塞之地。';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+    ji.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://img0.baidu.com/it/u=476574501,3935294681&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+        const link = document.createElement('a');
+        link.href = 'http://www.lnmuseum.com.cn/';
+        link.textContent = '官方网址';
+
+        hoveredText.innerHTML = '沈阳清皇宫，原名盛京皇宫，是中国清朝时期的皇家宫殿，位于今天的辽宁省沈阳市大东区滂江街太平庄附近。这座宫殿占地面积近6万平方米，建筑面积达3.3万平方米，是我国现存的最大的几座木结构宫殿之一。';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+    t.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://img1.baidu.com/it/u=3005902212,2470359249&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500';
+
+        const link = document.createElement('a');
+        link.href = 'http://www.jygjgy.net/';
+        link.textContent = '官方网址';
+
+        hoveredText.innerHTML = '嘉峪关，又称"函谷关"，是中国古代的重要关隘之一，位于甘肃省嘉峪关市境内，属于明长城的重要关口。因其历史悠久、文化深厚、景色壮美而著名。';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+    z.addEventListener('mouseover', () => {
+        const img = document.createElement('img');
+        img.style.width = '200px';
+        img.style.height = '200px';
+        img.style.position = 'absolute';
+        img.style.top = '200px';
+        img.style.left = '100px';
+        img.src = 'https://ts1.cn.mm.bing.net/th/id/R-C.4ba499ce15ee89fc5116b2f1e72b4d29?rik=zxV9hrF79nCZEg&riu=http%3a%2f%2fimg1.qunarzz.com%2ftravel%2fd7%2f1701%2fc2%2fc1e0519c6e8d09b5.jpg%3fver%3d1&ehk=z2Kg%2fNuo9UMJqDeUg4xkFEuFuP5bEB4Vu4PfaKIJmug%3d&risl=&pid=ImgRaw&r=0';
+
+        const link = document.createElement('a');
+        link.href = 'http://www.zhoukoudian.org.cn/';
+        link.textContent = '官方网址';
+
+        hoveredText.innerHTML = '周口店遗址，位于北京市房山区周口店镇境内，是中国最早发现的旧石器时代人类遗址之一，在世界上具有极高的学术价值和科研价值。现今已经开辟了周口店遗址博物馆供游客参观。';
+        hoveredText.appendChild(link);
+        hoveredText.appendChild(img);
+    });
+
+
+</script>
+</body>
+</html>

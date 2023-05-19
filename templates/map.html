@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>高德地图导航演示</title>
+    <style>
+        #container {
+            width: 100%;
+            height: 500px;
+        }
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .search-inputs {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .search-inputs label {
+            margin-left: 10px;
+            margin-right: 5px;
+        }
+        .search-inputs input {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-box">
+        <div class="search-inputs">
+            <label>你的位置：</label>
+            {{ user_location }}<br>
+            <span id="user-location"></span><br>
+            <label>起点：</label>
+            <input type="text" id="start-input">
+            <label>终点：</label>
+            <input type="text" id="end-input">
+            <button id="search-btn">搜索</button>
+        </div>
+        <div id="container"></div>
+        <div id="panel"></div>
+    </div>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=030a0ff6f642911b28a72539a57ac09c"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/ui/1.1/main.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            // 初始化地图
+            var map = new AMap.Map('container', {
+                resizeEnable: true,
+                zoom: 13
+            });
+
+            // 获取用户当前位置并标注
+            function getCurrentPosition() {
+                AMap.plugin('AMap.Geolocation', function() {
+                    var geolocation = new AMap.Geolocation({
+                        enableHighAccuracy: true,//是否使用高精度定位，默认为true
+                        timeout: 10000,          //超过10秒后停止定位，默认值：无穷大
+                        maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+                        convert: true           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+                    });
+
+                    geolocation.getCurrentPosition(function(status,result){
+                        if(status=='complete'){
+                            onComplete(result)
+                        }else{
+                            onError(result)
+                        }
+                    });
+
+                    // 定位成功
+                    function onComplete(data) {
+                        var location = data.position;
+                        var marker = new AMap.Marker({
+                            position: location,
+                            map: map
+                        });
+                        map.setCenter(location);
+                        $("#user-location").text(data.formattedAddress);
+                    }
+
+                    // 定位失败
+                    function onError(data) {
+                        console.error('定位失败');
+                    }
+                });
+            }
+            getCurrentPosition();
+
+            // 初始化驾车路径规划插件
+            var driving = new AMap.Driving({
+                map: map,
+                extensions: "all",
+                showTraffic: true,
+                autoFitView: true
+            });
+
+            // 绑定搜索按钮事件
+            $("#search-btn").click(function() {
+                searchRoute();
+            });
+
+            // 定义搜索路线函数
+            function searchRoute() {
+                var startAddress = $("#start-input").val();
+                var endAddress = $("#end-input").val();
+
+                // 发送起点和终点请求
+                $.ajax({
+                    type: "POST",
+                    url: "/map",
+                    data: {
+                        "start_address": startAddress,
+                        "end_address": endAddress
+                    },
+                    success: function(result) {
+                        // 调用路径规划 API 进行路线搜索
+                        var startLngLat = new AMap.LngLat(result.start[0], result.start[1]);
+                        var endLngLat = new AMap.LngLat(result.end[0], result.end[1]);
+                        driving.search(startLngLat, endLngLat, function(status, result) {
+                            if (status === 'complete') {
+                                console.log("搜索成功");
+                            } else {
+                                console.error("搜索失败：" + result.info);
+                            }
+                        });
+                    },
+                    error: function() {
+                        console.error("出错啦！");
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
