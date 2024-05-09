@@ -2,30 +2,6 @@
 
 这是一个基于 Flask 和 HTML 技术构建的旅游建议网站，用于向用户提供旅游目的地和行程的建议。
 
-## 安装
-
-1. Clone GitHub 仓库：  
-```git clone https://github.com/hacker1477/web-tour.git```
-
-2. 进入仓库根目录：  
-```cd travel-website```
-
-3. 在虚拟环境中安装所需依赖项：
-```pip install -r requirements.txt```
-
-## 运行应用程序
-
-1. 在终端或命令提示符中，进入项目根目录。
-
-2. 设置 Flask 应用程序的环境变量：  
-```export FLASK_APP=app.py```  
-```export FLASK_ENV=development```
-
-3. 启动应用程序：  
-`flask run`
-
-4. 在 Web 浏览器中打开 "http://localhost:5000/" 即可访问应用程序。
-
 ## 功能
 
 - 提供旅游目的地和行程的建议。
